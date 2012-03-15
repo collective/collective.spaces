@@ -1,0 +1,11 @@
+<rolemap>
+  <permissions>
+    <permission name="collective.spaces: Create Space via web" acquire="True">
+      <role name="Authenticated" />
+    </permission>
+    <permission name="collective.spaces: Add Space" acquire="True">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+    </permission>
+  </permissions>
+</rolemap>

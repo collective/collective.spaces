@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:grok="http://namespaces.zope.org/grok"
+    i18n_domain="collective.spaces">
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <includeDependencies package="." />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.spaces"
+      directory="profiles/default"
+      description="Installs the collective.spaces package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+  <!-- Permission for adding Spaces -->
+  <!-- Create a new Space via the web form -->
+  <permission
+      id="collective.spaces.CreateSpaceViaWeb"
+      title="collective.spaces: Create Space via web"
+    />
+
+  <!-- Create a new Space manually (admin only) -->
+  <permission
+      id="collective.spaces.AddSpace"
+      title="collective.spaces: Add Space"
+    />
+
+  <grok:grok package="." />
+  <include package=".browser" />
+
+  <!-- -*- extra stuff goes here -*- -->
+
+
+</configure>

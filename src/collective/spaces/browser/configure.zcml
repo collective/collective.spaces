@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <browser:menuItem
+      for="collective.spaces.space.ISpace"
+      menu="plone_displayviews"
+      title="Properties view"
+      action="@@view"
+      description="Default display of properties of objects."
+      />
+
+</configure>
