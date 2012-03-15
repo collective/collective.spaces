@@ -4,5 +4,7 @@ Changelog
 0.1dev (unreleased)
 -------------------
 
+- Added basic Space self-creation form.
+  [davidjb]
 - Package created using zopeskel
-  [JCU eResearch Centre]
+  [davidjb]
