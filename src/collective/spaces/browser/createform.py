@@ -84,7 +84,7 @@ class CreateSpaceForm(form.SchemaForm):
 
         space_id = str(data['id'])
         space_title = str(data['space_title'])
-        template_id = str(data['template_id'])
+        template_id = str(data.get('template_id', u'space-template'))
         try:
             template_cp = self.context.manage_copyObjects(template_id)
             #Result looks like [{'new_id': 'copy_of_space-template', 'id': 'space-template'}]
