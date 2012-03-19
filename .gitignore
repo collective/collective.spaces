@@ -20,4 +20,6 @@ dist
 *.pyc
 *.pyo
 *.tmp*
-
+.coverage
+include
+lib
