@@ -72,6 +72,13 @@ Suggestions
   (or both). Intertwining mechanisms like local authentication, LDAP, or 
   Shibboleth, can easily mean that users can self-manage collaboration with 
   local and external users.
+* *Navigation*: if users are expected to be creating many Spaces, then the
+  Plone portal tabs will quickly consume lots of space. To combat this, simply
+  either turn off the ``Automatically generate tabs`` option in the ``Navigation
+  settings`` control panel, or else de-select the ``Space`` content type from 
+  the ``Displayed content types`` option. If using this latter strategy, then
+  consider how users will actually access their Space - hiding from navigation
+  entirely likely means users need directly access their URL.
 
 Collaboration
 =============
