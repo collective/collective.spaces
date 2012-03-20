@@ -87,3 +87,14 @@ Source code is available within the ``collective Github`` at
 `https://github.com/collective/collective.spaces`_ for submission of issues, 
 fixes, and improvements.
 
+To Do
+=====
+
+* Handle issues with displaying ID field 
+* More testing infrastructure for functionality
+
+  * Test overall Space creation as a user and as administrator
+  * Check user 'Edit' permissions for the Space
+
+* Complete email notification content rule
+
