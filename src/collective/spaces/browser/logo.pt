@@ -1,0 +1,3 @@
+<tal:logo replace="structure view/logo">
+   Logo
+</tal:logo>
