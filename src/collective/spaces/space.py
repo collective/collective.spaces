@@ -28,6 +28,15 @@ class ISpace(form.Schema):
         required=False,
     )
 
+    custom_logo_scale = schema.Choice(
+        title=_(u"Custom Logo Size"),
+        description=_(u"Select a size for your custom logo. The logo will "
+                      u"automatically be scaled accordingly."),
+        required=True,
+        default="preview",
+        vocabulary=u"collective.spaces.scales_vocabulary",
+    )
+
 
 class Space(Container):
     grok.implements(IDAVAware)
