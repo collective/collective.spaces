@@ -25,3 +25,6 @@ COLLECTIVE_SPACES_FIXTURE = CollectiveSpaces()
 COLLECTIVE_SPACES_INTEGRATION_TESTING = \
     IntegrationTesting(bases=(COLLECTIVE_SPACES_FIXTURE, ),
                        name="CollectiveSpaces:Integration")
+COLLECTIVE_SPACES_FUNCTIONAL_TESTING = \
+    FunctionalTesting(bases=(COLLECTIVE_SPACES_FIXTURE, ),
+                       name="CollectiveSpaces:Functional")
