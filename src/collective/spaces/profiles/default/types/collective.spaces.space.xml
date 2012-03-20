@@ -23,7 +23,7 @@
  </property>
  <property name="default_view_fallback">False</property>
  <property name="add_permission">collective.spaces.AddSpace</property>
- <property name="klass">plone.dexterity.content.Container</property>
+ <property name="klass">collective.spaces.space.Space</property>
  <property name="behaviors">
   <element value="plone.app.dexterity.behaviors.metadata.IDublinCore"/>
   <element value="plone.app.layout.navigation.interfaces.INavigationRoot"/>
