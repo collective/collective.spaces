@@ -17,7 +17,7 @@ class ISpace(form.Schema):
     id = schema.ASCIILine(
         title=_(u"Short Name"),
         description=_(u"Should not contain spaces, underscores or mixed case. "
-                      "Short Name is part of the item's web address."),
+                      u"Short Name is part of the item's web address."),
         required=False,
         constraint=isValidId
     )
