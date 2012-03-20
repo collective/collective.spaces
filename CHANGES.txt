@@ -4,6 +4,8 @@ Changelog
 0.1dev (unreleased)
 -------------------
 
+- Adding ability to set custom logo on Space and set image scale.
+  [davidjb]
 - Added basic Space self-creation form.
   [davidjb]
 - Package created using zopeskel
