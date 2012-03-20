@@ -103,7 +103,10 @@ class CreateSpaceForm(form.SchemaForm):
 
             membership_tool = getToolByName(self.context, 'portal_membership')
             member = membership_tool.getAuthenticatedMember()
-            new_space.manage_setLocalRoles(member.getUserName(), ALL_ROLES)
+            member_id = member.getUserName()
+
+            new_space.manage_setLocalRoles(member_id, ALL_ROLES)
+            new_space.setCreators(member_id)
             new_space.reindexObject()
 
             #If okay, then redirect to the new Space
