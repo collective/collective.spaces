@@ -146,7 +146,6 @@ class SpaceIdValidator(validator.SimpleFieldValidator):
 validator.WidgetValidatorDiscriminators(
     SpaceIdValidator,
     field=ICreateSpace['id'],
-    view=CreateSpaceForm
 )
 grok.global_adapter(SpaceIdValidator)
 
@@ -161,12 +160,11 @@ class TemplateIdValidator(validator.SimpleFieldValidator):
 validator.WidgetValidatorDiscriminators(
     TemplateIdValidator,
     field=ICreateSpace['template_id'],
-    view=CreateSpaceForm
 )
 grok.global_adapter(TemplateIdValidator)
 
-class SpaceReCaptchaValidator(ReCaptchaValidator):
-    pass
+#class SpaceReCaptchaValidator(ReCaptchaValidator):
+#    pass
 
 #validator.WidgetValidatorDiscriminators(
 #    SpaceReCaptchaValidator,
