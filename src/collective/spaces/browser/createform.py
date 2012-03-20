@@ -1,5 +1,6 @@
 from five import grok
 from zope import interface, schema
+from zope.security import checkPermission
 from z3c.form import button, validator
 
 from Products.CMFCore.interfaces import ISiteRoot
@@ -75,8 +76,13 @@ class CreateSpaceForm(form.SchemaForm):
 
     @button.buttonAndHandler(_(u'Create'))
     def handleApply(self, action):
-        """Handle the process of creating the user's new Space at the site
-        root."""
+        """Handle the process of creating the user's new Space at site root.
+
+        This function utilises the manage_clone functionality associated
+        with Plone in order to reproduce a given template. Administrative
+        users are presented with the option to change the template ID whereas
+        normal users cannot do so to prevent security issues.
+        """
         data, errors = self.extractData()
         if errors:
             self.status = self.formErrorsMessage
@@ -84,7 +90,12 @@ class CreateSpaceForm(form.SchemaForm):
 
         space_id = str(data['id'])
         space_title = str(data['space_title'])
-        template_id = str(data.get('template_id', u'space-template'))
+        template_id = 'space-template'
+
+        #Only load the template_id from the request if allowed
+        if checkPermission('collective.spaces.AddSpace', self.context):
+            template_id = str(data.get('template_id', u'space-template'))
+
         try:
             template = self.context[template_id]
             new_space = self.context.manage_clone(template, space_id)
