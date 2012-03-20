@@ -86,11 +86,8 @@ class CreateSpaceForm(form.SchemaForm):
         space_title = str(data['space_title'])
         template_id = str(data.get('template_id', u'space-template'))
         try:
-            template_cp = self.context.manage_copyObjects(template_id)
-            #Result looks like [{'new_id': 'copy_of_space-template', 'id': 'space-template'}]
-            result = self.context.manage_pasteObjects(template_cp)
-            new_space = self.context[result[0]['new_id']]
-            new_space.setId(space_id)
+            template = self.context[template_id]
+            new_space = self.context.manage_clone(template, space_id)
             new_space.setTitle(space_title)
 
             membership_tool = getToolByName(self.context, 'portal_membership')
