@@ -1,5 +1,5 @@
 id: space-template
 title: Space Template
 description: This is the default text for this template. Change this to a suitable description for your Space.
-exclude_from_nav: True
+exclude_from_nav: False
 
