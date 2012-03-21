@@ -13,14 +13,14 @@ class ISpace(form.Schema):
     """Virtual collaboration workspace that acts as a navigation root.
     """
 
-    form.order_before(id='*')
-    id = schema.ASCIILine(
-        title=_(u"Short Name"),
-        description=_(u"Should not contain spaces, underscores or mixed case. "
-                      u"Short Name is part of the item's web address."),
-        required=False,
-        constraint=isValidId
-    )
+    #form.order_before(id='*')
+    #id = schema.ASCIILine(
+    #    title=_(u"Short Name"),
+    #    description=_(u"Should not contain spaces, underscores or mixed case. "
+    #                  u"Short Name is part of the item's web address."),
+    #    required=False,
+    #    constraint=isValidId
+    #)
 
     custom_logo = NamedImage(
         title=_(u"Custom Logo"),
