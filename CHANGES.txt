@@ -4,6 +4,10 @@ Changelog
 0.1dev (unreleased)
 -------------------
 
+- Providing decorator for elevated contributor access on the portal.
+  [davidjb]
+- Added doctests for Space self-creation form.
+  [davidjb]
 - Adding ability to set custom logo on Space and set image scale.
   [davidjb]
 - Added basic Space self-creation form.

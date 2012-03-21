@@ -1,3 +1,5 @@
+import doctest
+
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
@@ -28,3 +30,7 @@ COLLECTIVE_SPACES_INTEGRATION_TESTING = \
 COLLECTIVE_SPACES_FUNCTIONAL_TESTING = \
     FunctionalTesting(bases=(COLLECTIVE_SPACES_FIXTURE, ),
                        name="CollectiveSpaces:Functional")
+
+DOC_TEST_OPTIONS = doctest.ELLIPSIS \
+        | doctest.REPORT_ONLY_FIRST_FAILURE \
+        | doctest.NORMALIZE_WHITESPACE

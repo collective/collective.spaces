@@ -1,15 +1,18 @@
 import unittest2 as unittest
+import doctest
 import transaction
 
 import zope
 from z3c.form.interfaces import IValidator
 from plone.app.dexterity.interfaces import InvalidIdError
+from plone.testing import layered
 from plone.testing.z2 import Browser
 from plone.app.testing import setRoles, \
         TEST_USER_ID, TEST_USER_NAME, TEST_USER_PASSWORD
 
 from collective.spaces.browser.createform import ICreateSpace
-from collective.spaces.testing import COLLECTIVE_SPACES_FUNCTIONAL_TESTING
+from collective.spaces.testing import COLLECTIVE_SPACES_FUNCTIONAL_TESTING, \
+        DOC_TEST_OPTIONS
 
 class TestCreateSpaceForm(unittest.TestCase):
     """ Test the `Create a Space` form.
@@ -23,7 +26,6 @@ class TestCreateSpaceForm(unittest.TestCase):
         self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.portal_url = self.portal.absolute_url()
-
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         self.portal.invokeFactory('Document', id='example-page', title='Example')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
@@ -139,3 +141,23 @@ class TestCreateSpaceForm(unittest.TestCase):
         self.assertIn('example-page', self.portal)
         self.assertIsNone(validator.validate(u'example-page'))
 
+def _setUp(test):
+    layer = test.globs['layer']
+    portal = layer['portal']
+    setRoles(portal, TEST_USER_ID, ['Manager'])
+    portal.invokeFactory('News Item', id='example-item', title='Example News')
+    setRoles(portal, TEST_USER_ID, ['Member'])
+    transaction.commit()
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTests([
+        unittest.makeSuite(TestCreateSpaceForm),
+        layered(
+            doctest.DocTestSuite('collective.spaces.browser.createform',
+                                 optionflags=DOC_TEST_OPTIONS,
+                                 setUp=_setUp),
+            layer=COLLECTIVE_SPACES_FUNCTIONAL_TESTING
+        ),
+    ])
+    return suite

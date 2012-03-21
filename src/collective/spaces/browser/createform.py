@@ -10,7 +10,7 @@ from plone.app.dexterity.interfaces import isValidId
 from plone.directives import form
 from plone.formwidget.recaptcha import ReCaptchaValidator
 
-from collective.spaces import _
+from collective.spaces import _, utils
 
 ALL_ROLES = ['Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner']
 
@@ -54,9 +54,158 @@ class ICreateSpace(form.Schema):
 #    )
 
 class CreateSpaceForm(form.SchemaForm):
-    """Form used to create Space content via the web. This form
-    copies a template in order to produce a new Space. This gives the
+    """Form used to create Space content via the web.
+
+    This form clones a template in order to produce a new Space. This gives the
     end administrators flexibility on the pre-canned content they provide.
+
+        >>> from plone.app import testing
+        >>> import transaction
+
+        >>> app = layer['app']
+        >>> portal = layer['portal']
+
+    Initialise the testing browser and log in.
+
+        >>> from plone.testing.z2 import Browser
+        >>> browser = Browser(app)
+        >>> portal_url = portal.absolute_url()
+        >>> browser.open(portal_url)
+        >>> browser.addHeader('Authorization',
+        ...   'Basic %s:%s' % (testing.TEST_USER_NAME,
+        ...                    testing.TEST_USER_PASSWORD,))
+
+    Login as a regular user with the Authenticated role.
+
+        >>> testing.setRoles(portal, testing.TEST_USER_ID, ['Authenticated'])
+        >>> transaction.commit()
+        >>> browser.reload()
+        >>> testing.TEST_USER_ID in browser.contents
+        True
+
+    Load the form
+
+        >>> browser.open(portal_url+'/@@create-space')
+        >>> 'Create a new Space' in browser.contents
+        True
+
+    Enter details onto the form to create the Space
+
+        >>> browser.getControl('Space ID').value = 'new-id'
+        >>> browser.getControl('Space Title').value = \\
+        ...     'Custom title'
+
+    Ensure the Template ID field isn't present at the moment.
+
+        >>> browser.getControl('Template ID')
+        Traceback (most recent call last):
+        ...
+        LookupError:...
+
+    Create our Space
+
+        >>> browser.getControl('Create').click()
+        >>> 'Welcome to your new Space' in browser.contents
+        True
+        >>> print browser.url
+        http://nohost/plone/new-id
+
+    Check that template was created with correct properties.
+
+        >>> 'new-id' in portal
+        True
+        >>> space = portal['new-id']
+        >>> print space.portal_type
+        collective.spaces.space
+        >>> print space.id
+        new-id
+        >>> print space.title
+        Custom title
+        >>> space.Creator() == testing.TEST_USER_NAME
+        True
+
+
+    Our current user should have local roles in this context.
+
+        >>> [x for x in space.get_local_roles() if x[0] == \\
+        ...     testing.TEST_USER_NAME][0]
+        ('test-user', ('Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner'))
+
+    Super.  Let's carry on and login as an adminstrator with the
+    Site Administrator role.
+
+        >>> testing.setRoles(portal,testing.TEST_USER_ID,['Site Administrator'])
+        >>> transaction.commit()
+        >>> browser.open(portal_url)
+        >>> 'Site Setup' in browser.contents
+        True
+
+    Try and create another Space.
+
+        >>> browser.open(portal_url+'/@@create-space')
+
+    Enter details onto the form to create the Space. Let's try creating
+    a Space with a pre-existing ID.
+
+        >>> browser.getControl('Space ID').value = 'new-id'
+        >>> browser.getControl('Space Title').value = \\
+        ...     'Custom title'
+        >>> browser.getControl('Create').click()
+
+    Check the errors are reported.
+
+        >>> 'There were some errors' in browser.contents
+        True
+        >>> 'This ID is reserved' in browser.contents
+        True
+
+    Fix this up.
+
+        >>> browser.getControl('Space ID').value = 'example-item-cloned'
+
+    We've intentionally selected an ID of a template that we know
+    doesn't exist to check the validator. This implicitly tests the
+    presence of the Template ID field since we're an admin.
+
+        >>> 'non-existant' not in portal
+        True
+        >>> browser.getControl('Template ID').value = 'non-existant'
+        >>> browser.getControl('Create').click()
+
+    Check the errors that happened. The ID field should be correct now
+    and the Template ID should be problematic.
+
+        >>> 'This ID is reserved' in browser.contents
+        False
+        >>> 'An object of this ID does not exist' in browser.contents
+        True
+
+    Correct the template ID. We'll use something that doesn't even have
+    to be a Space content instance to prove we can successfully.
+
+        >>> browser.getControl('Template ID').value = 'example-item'
+
+    Create our clone of this item
+
+        >>> browser.getControl('Create').click()
+
+    Test this new copy exists and that everything worked.
+
+        >>> print browser.url
+        http://nohost/plone/example-item-cloned
+        >>> clone = portal['example-item-cloned']
+        >>> print clone.portal_type
+        News Item
+        >>> print clone.title
+        Custom title
+
+    Test the Cancel button for the form.
+
+        >>> browser.open(portal_url+'/@@create-space')
+        >>> browser.getControl('Cancel').click()
+        >>> browser.url == portal_url
+        True
+
     """
     grok.name('create-space')
     grok.require('collective.spaces.CreateSpaceViaWeb')
@@ -96,17 +245,16 @@ class CreateSpaceForm(form.SchemaForm):
         if checkPermission('collective.spaces.AddSpace', self.context):
             template_id = str(data.get('template_id', u'space-template'))
 
+        membership_tool = getToolByName(self.context, 'portal_membership')
+        member = membership_tool.getAuthenticatedMember()
+        member_id = member.getUserName()
+
         try:
             template = self.context[template_id]
-            new_space = self.context.manage_clone(template, space_id)
+            new_space = utils._clone(self.context, template, space_id)
             new_space.setTitle(space_title)
-
-            membership_tool = getToolByName(self.context, 'portal_membership')
-            member = membership_tool.getAuthenticatedMember()
-            member_id = member.getUserName()
-
-            new_space.manage_setLocalRoles(member_id, ALL_ROLES)
             new_space.setCreators(member_id)
+            new_space.manage_setLocalRoles(member_id, ALL_ROLES)
             new_space.reindexObject()
 
             #If okay, then redirect to the new Space
