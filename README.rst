@@ -13,7 +13,7 @@ This product deploys a light-weight Dexterity-based content type
 be useful in a self-managed, collaborative environment.  For instance:
 
 * Ability for users to self-create Spaces
-* Each Space appears as a subsite
+* Each Space appears as a sub-site
 * Customisable logo per-Space
 * Ability for site administration to custom Space template
 
@@ -27,7 +27,7 @@ What this offers
 * Attempts to use as little voodoo as possible to achieve just the features
   on offer.
 * Other options like ``collective.lineage`` provide unnecessary features 
-  and introduce undesireable depenedencies
+  and introduce undesirable dependencies
 
 Use Case (aka when-to-use-this)
 ===============================
@@ -90,7 +90,7 @@ Collaboration
 =============
 
 Source code is available within the ``collective Github`` at 
-`https://github.com/collective/collective.spaces`_ for submission of issues, 
+https://github.com/collective/collective.spaces for submission of issues, 
 fixes, and improvements.
 
 To Do
