@@ -34,10 +34,8 @@ class TestCreateSpaceForm(unittest.TestCase):
     def test_createform(self):
         """ Ensure the Create a Space form is traversable.
         """
-        try:
-            self.portal.restrictedTraverse('@@create-space')
-        except:
-            self.fail('No create form available')
+        from collective.spaces.browser.createform import CreateSpaceForm
+        self.assertIsInstance(self.portal.restrictedTraverse('@@create-space'), CreateSpaceForm)
 
     def test_createform_administrators(self):
         """ Test create Space form for types of admin users.
