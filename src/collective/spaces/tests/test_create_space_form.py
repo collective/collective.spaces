@@ -57,10 +57,7 @@ class TestCreateSpaceForm(unittest.TestCase):
         browser.open(self.portal_url+'/@@create-space')
         self.assertIn('Create a new Space', browser.contents)
         self.assertIn('Template ID', browser.contents)
-        try:
-            browser.getControl(name='form.widgets.template_id')
-        except:
-            self.fail()
+        self.assertIsNotNone(browser.getControl(name='form.widgets.template_id'))
 
     def test_createform_regular_users(self):
         """ Test create Space form for types of regular (non-admin) users.

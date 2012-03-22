@@ -27,11 +27,8 @@ class TestInstall(unittest.TestCase):
     def test_permissions_installed(self):
         """ Ensure permissions are available and set correctly.
         """
-        try:
-            self.portal.rolesOfPermission('collective.spaces: Add Space')
-            self.portal.rolesOfPermission('collective.spaces: Create Space via web')
-        except:
-            self.fail('Permissions not available')
+        self.assertIsNotNone(self.portal.rolesOfPermission('collective.spaces: Add Space'))
+        self.assertIsNotNone(self.portal.rolesOfPermission('collective.spaces: Create Space via web'))
 
     def test_structure_created(self):
         from collective.spaces.space import ISpace
