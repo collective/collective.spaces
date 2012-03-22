@@ -32,13 +32,13 @@ What this offers
 Use Case (aka when-to-use-this)
 ===============================
 
-# Desire to allow various groups of users to collaborate but without
-  administrative overhead/intervention
-# Users should be able to create new sub-sites at the Plone root, without
-  the need for administrative intervention
-# Each workspace should be able to be self-managed
-# Each workspace can be allowed limited customisation
-# Workspaces should be all contained within a single Plone site
+#. Desire to allow various groups of users to collaborate but without
+   administrative overhead/intervention
+#. Users should be able to create new sub-sites at the Plone root, without
+   the need for administrative intervention
+#. Each workspace should be able to be self-managed
+#. Each workspace can be allowed limited customisation
+#. Workspaces should be all contained within a single Plone site
 
 Installation
 ============
