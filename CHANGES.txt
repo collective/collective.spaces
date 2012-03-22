@@ -4,6 +4,9 @@ Changelog
 0.1dev (unreleased)
 -------------------
 
+- Provide email content rule for when Spaces are created. This is not
+  enabled by default.
+  [davidjb]
 - Providing decorator for elevated contributor access on the portal.
   [davidjb]
 - Added doctests for Space self-creation form.
