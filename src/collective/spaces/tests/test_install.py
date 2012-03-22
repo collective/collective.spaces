@@ -38,3 +38,10 @@ class TestInstall(unittest.TestCase):
 
         self.assertIn('space-template', self.portal)
         self.assertTrue(ISpace.providedBy(self.portal['space-template']))
+
+    def test_actions(self):
+        actions_tool = getToolByName(self.portal, 'portal_actions')
+
+        self.assertIn('create_space', actions_tool.user)
+        self.assertIn('portal_home', actions_tool.site_actions)
+
