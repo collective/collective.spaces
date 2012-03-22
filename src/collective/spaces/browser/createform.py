@@ -267,11 +267,9 @@ class CreateSpaceForm(form.SchemaForm):
             space_url = new_space.absolute_url()
             self.request.response.redirect(space_url)
         except:
-            raise
             self.status = _(u"An error occurred whilst creating your Space \
                             with this ID. Please try again or contact your \
                             site administrator if issues persist.")
-            return
 
 
     @button.buttonAndHandler(_(u"Cancel"))
