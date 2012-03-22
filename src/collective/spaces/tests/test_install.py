@@ -42,3 +42,11 @@ class TestInstall(unittest.TestCase):
         self.assertIn('create_space', actions_tool.user)
         self.assertIn('portal_home', actions_tool.site_actions)
 
+    def test_content_rules(self):
+        from zope.component import getUtility
+        from plone.contentrules.engine.interfaces import IRuleStorage
+        storage = getUtility(IRuleStorage)
+        rule = storage.get('spaces-email-notification')
+        self.assertEqual(rule.id, '++rule++spaces-email-notification')
+        self.assertTrue(rule.enabled)
+

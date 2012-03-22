@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<contentrules>
+ <rule name="spaces-email-notification"
+    title="Email notification on Space creation"
+    description="Notify on a new collective.space being created"
+    enabled="True" event="zope.lifecycleevent.interfaces.IObjectAddedEvent"
+    stop-after="False">
+  <conditions>
+   <condition type="plone.conditions.PortalType">
+    <property name="check_types">
+     <element>collective.spaces.space</element>
+    </property>
+   </condition>
+  </conditions>
+  <actions>
+   <action type="plone.actions.Mail">
+    <property name="source">${user_email}</property>
+    <property name="message">Hi there,
+
+     A new ${type} was created on your portal at this address: ${absolute_url}.
+
+     Here's some useful metadata about the ${type} and its creator:
+
+     Date Created: ${created}
+     E-Mail Address: ${user_email}
+     Full Name: ${user_fullname}
+     User ID: ${user_id}
+
+     Kind regards,
+     Site Administrator</property>
+    <property name="recipients">root@localhost</property>
+    <property name="subject">New ${type} Created</property>
+   </action>
+  </actions>
+ </rule>
+ <assignment name="spaces-email-notification" bubbles="False" enabled="False" location=""/>
+</contentrules>
