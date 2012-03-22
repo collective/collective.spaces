@@ -96,11 +96,7 @@ fixes, and improvements.
 To Do
 =====
 
-* Check scaling options for custom logo viewlet
-* Handle issues with displaying ID field 
-* More testing infrastructure for functionality
-
-  * Check user 'Edit' permissions for the Space
-
-* Complete email notification content rule
+* Tests for email notification content rule (when enabled)
+* Handle issues with displaying ID field - can we sanely present users
+  the ability to change their Space ID? 
 
