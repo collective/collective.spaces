@@ -90,10 +90,10 @@ fixes, and improvements.
 To Do
 =====
 
+* Check scaling options for custom logo viewlet
 * Handle issues with displaying ID field 
 * More testing infrastructure for functionality
 
-  * Test overall Space creation as a user and as administrator
   * Check user 'Edit' permissions for the Space
 
 * Complete email notification content rule
