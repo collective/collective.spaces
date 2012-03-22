@@ -15,7 +15,7 @@ be useful in a self-managed, collaborative environment.  For instance:
 * Ability for users to self-create Spaces
 * Each Space appears as a sub-site
 * Customisable logo per-Space
-* Ability for site administration to custom Space template
+* Ability for site administration to customise Space template
 
 What this offers
 ================
@@ -67,29 +67,32 @@ ZCML registration is not necessary as this egg includes a
 Suggestions
 ===========
 
-* *Authentication*: enable user self-registration on Plone or enable
-  another authentication mechanism to reduce administrative input needed
-  (or both). Intertwining mechanisms like local authentication, LDAP, or 
-  Shibboleth, can easily mean that users can self-manage collaboration with 
-  local and external users.
+*Authentication*
+    Enable user self-registration on Plone or enable
+    another authentication mechanism to reduce administrative input needed
+    (or both). Intertwining mechanisms like local authentication, LDAP, or 
+    Shibboleth, can easily mean that users can self-manage collaboration with 
+    local and external users.
 
-* *Navigation*: if users are expected to be creating many Spaces, then the
-  Plone portal tabs will quickly consume lots of space. To combat this, simply
-  either turn off the ``Automatically generate tabs`` option in the ``Navigation
-  settings`` control panel, or else de-select the ``Space`` content type from 
-  the ``Displayed content types`` option. If using this latter strategy, then
-  consider how users will actually access their Space - hiding from navigation
-  entirely likely means users need directly access their URL.
+*Navigation*
+    If users are expected to be creating many Spaces, then the Plone portal
+    tabs will quickly consume lots of space. To combat this, simply either turn
+    off the ``Automatically generate tabs`` option in the ``Navigation
+    settings`` control panel, or else de-select the ``Space`` content type from
+    the ``Displayed content types`` option. If using this latter strategy, then
+    consider how users will actually access their Space - hiding from
+    navigation entirely likely means users need directly access their URL.
 
-* *Email notification*: A common situation may be where a site administrator
-  wants to keep track of the Spaces being created. A Plone Content Rule is
-  provided with this add-on to satisfy this use case.  Using this Rule is 
-  completely optional -- it is installed but not enabled by default.
+Email notification
+    A common situation may be where a site administrator
+    wants to keep track of the Spaces being created. A Plone Content Rule is
+    provided with this add-on to satisfy this use case.  Using this Rule is 
+    completely optional -- it is installed but not enabled by default.
 
 Collaboration
 =============
 
-Source code is available within the ``collective Github`` at 
+Source code is available within the `collective GitHub` at 
 https://github.com/collective/collective.spaces for submission of issues, 
 fixes, and improvements.
 
