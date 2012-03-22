@@ -206,6 +206,27 @@ class CreateSpaceForm(form.SchemaForm):
         >>> browser.url == portal_url
         True
 
+    Test that the error message is displayed if something goes wrong
+    when cloning the Space.
+
+        >>> browser.open(portal_url+'/@@create-space')
+
+    Swap out the _clone function for something that will *definitely*
+    throw an exception.
+
+        >>> from collective.spaces import utils
+        >>> utils._clone_old = utils._clone
+        >>> utils._clone = lambda: 1/0
+
+        >>> browser.getControl('Space ID').value = 'this-will-break'
+        >>> browser.getControl('Space Title').value = 'Test Breakage'
+        >>> browser.getControl('Create').click()
+
+        >>> "An error occurred whilst creating your Space" in browser.contents
+        True
+
+        >>> utils._clone = utils._clone_old
+
     """
     grok.name('create-space')
     grok.require('collective.spaces.CreateSpaceViaWeb')
