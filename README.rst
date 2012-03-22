@@ -3,7 +3,7 @@
 Introduction
 ============
 
-.. image:: docs/spaces-logo.png
+.. image:: src/collective/spaces/resources/spaces-logo.png
    :align: right
 
 `collective.spaces` is a simple way of creating mini-sites within the Plone
