@@ -6,8 +6,70 @@ from collective.spaces.space import ISpace
 CUSTOM_LOGO_FIELD = 'custom_logo'
 
 class CustomLogoViewlet(common.LogoViewlet):
+    """ Logo viewlet used to customise logos for Space areas.
+
+    Users have the ability to specify their own logo against their Space
+    and this viewlet will render this accordingly. This logo builds upon
+    what Plone's default logo viewlet does in rendering.
+
+    Users can also select a scale for their image. Check to make sure this
+    selection is relfected correctly.
+
+        >>> app = layer['app']
+        >>> portal = layer['portal']
+        >>> space = layer['space']
+
+    Read in an image to use
+
+        >>> import os
+        >>> import collective.spaces
+        >>> filename = os.path.join(os.path.dirname(collective.spaces.__file__),
+        ...                                     'resources', 'spaces-logo.png')
+        >>> image = open(filename, 'rb').read()
+
+    Set it as the custom Space logo
+
+        >>> import transaction
+        >>> from plone import namedfile
+        >>> space.custom_logo = namedfile.NamedImage(image, filename=u"img.png")
+        >>> transaction.commit()
+
+    Load up our test browser to check the custom logo
+
+        >>> from plone.testing.z2 import Browser
+        >>> browser = Browser(app)
+        >>> browser.open(space.absolute_url())
+        >>> '<img src="http://nohost/plone/test-space/@@images/' \\
+        ...     in browser.contents
+        True
+
+    Scaling is set at 400x400 by default
+
+        >>> 'title="My wonderful Space" height="101" width="400" /></a>' \\
+        ...     in browser.contents
+        True
+
+    Change scaling and reload the page. Any of the plone.app.imaging scales
+    can be selected here.
+
+        >>> space.custom_logo_scale = "thumb"
+        >>> transaction.commit()
+        >>> browser.reload()
+
+        >>> 'title="My wonderful Space" height="32" width="128" /></a>' \\
+        ...     in browser.contents
+        True
+
+    Remove the custom logo
+
+        >>> space.custom_logo = None
+        >>> transaction.commit()
+
+    """
 
     def update(self):
+        """ Update the viewlet with suitable properties.
+        """
         super(common.LogoViewlet, self).update()
 
         navigation_root = self.portal_state.navigation_root()
@@ -81,6 +143,11 @@ class LogoViewlet(common.LogoViewlet):
     index = ViewPageTemplateFile('logo.pt')
 
     def update(self):
+        """ Update the viewlet with suitable properties.
+
+        This method renders the correct logo accordingly and the thin
+        logo.pt file only shows this resulting HTML.
+        """
         super(common.LogoViewlet, self).update()
 
         navigation_root = self.portal_state.navigation_root()
