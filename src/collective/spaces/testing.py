@@ -18,6 +18,9 @@ class CollectiveSpaces(PloneSandboxLayer):
         xmlconfig.file('configure.zcml',
                        collective.spaces,
                        context=configurationContext)
+        xmlconfig.file('overrides.zcml',
+                       collective.spaces,
+                       context=configurationContext)
 
 
     def setUpPloneSite(self, portal):
