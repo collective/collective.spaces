@@ -14,7 +14,7 @@
       name="default"
       title="collective.spaces"
       directory="profiles/default"
-      description="Installs the collective.spaces package"
+      description="Installs self-managed collaborative workspace infrastructure (Spaces)"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
