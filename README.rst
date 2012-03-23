@@ -43,6 +43,9 @@ Use Case (aka when-to-use-this)
 Installation
 ============
 
+Buildout
+--------
+
 ``collective.spaces`` is compatible with recent version of Plone and is 
 tested with Plone 4.2 and Dexterity 1.2.1.  Add this egg to your Plone
 instance in your buildout like so -- it's highly recommended that
@@ -62,16 +65,47 @@ libraries and Dexterity::
         collective.spaces
 
 ZCML registration is not necessary as this egg includes a 
-``z3c.autoinclude`` entry point.
+``z3c.autoinclude`` entry point.  Once you have added this to your buildout,
+re-run your ``./bin/buildout`` script.
+
+Activation within Plone
+-----------------------
+
+* Once buildout has completed, restart your Plone instance.
+* Load and login to your Plone instance, and go to `Add-ons` under `Site Setup`.
+* Locate ``collective.spaces`` in the add-ons list and `Activate` it.
+* Once complete, notice that:
+
+  * There is `Create new Space` in your personal tools menu
+  * A `Space Template` exists at the root of your portal
+  * Site Administrators and Managers can manually add `Space` content anywhere
+
+Security defaults
+-----------------
+
+By default:
+
+* All logged-in users have the ability to create new Spaces via
+  the `Create a new Space` form (``/@@create-space``). 
+* Only Site Administrators and Managers can manually create Spaces via the
+  `Add new` menu. Regular users, including `Contributor` users, cannot do this.
+
+To change these defaults, load the `Manage Access` ZMI page 
+(for instance, ``http://localhost:8080/Plone/manage_access``) and change the
+roles associated with the relevant ``collective.spaces`` permissions.
 
 Suggestions
 ===========
 
+Whilst this product is opinionated regarding aspects like default security
+permissions, a configurator can use the rest of Plone's functionality
+to enhance Spaces (and reduce administration overhead). Some examples are:
+
 *Authentication*
     Enable user self-registration on Plone or enable
     another authentication mechanism to reduce administrative input needed
-    (or both). Intertwining mechanisms like local authentication, LDAP, or 
-    Shibboleth, can easily mean that users can self-manage collaboration with 
+    (or both). Intertwining mechanisms like local authentication, LDAP, CAS, or 
+    Shibboleth can easily mean that users can self-manage collaboration with 
     local and external users.
 
 *Navigation*
