@@ -38,7 +38,6 @@ setup(name='collective.spaces',
           'plone.app.dexterity',
           'plone.app.z3cform',
           'plone.directives.form',
-          'plone.formwidget.recaptcha',
           # -*- Extra requirements: -*-
       ],
       extras_require={'test': ['plone.app.testing']},

@@ -46,13 +46,6 @@ class ICreateSpace(form.Schema):
         default=u"space-template",
     )
 
-#    form.widget(captcha='plone.formwidget.recaptcha.ReCaptchaFieldWidget')
-#    captcha = schema.TextLine(
-#        title=_(u"Verification"),
-#        description=_(u"Enter the words you see to verify your request."),
-#        required=False,
-#    )
-
 class CreateSpaceForm(form.SchemaForm):
     """Form used to create Space content via the web.
 
@@ -330,12 +323,3 @@ validator.WidgetValidatorDiscriminators(
 )
 grok.global_adapter(TemplateIdValidator)
 
-#class SpaceReCaptchaValidator(ReCaptchaValidator):
-#    pass
-
-#validator.WidgetValidatorDiscriminators(
-#    SpaceReCaptchaValidator,
-#    field=ICreateSpace['captcha'],
-#    view=CreateSpaceForm
-#)
-#grok.global_adapter(SpaceReCaptchaValidator)
