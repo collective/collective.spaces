@@ -118,7 +118,7 @@ to enhance Spaces (and reduce administration overhead). Some examples are:
     consider how users will actually access their Space - hiding from
     navigation entirely likely means users need directly access their URL.
 
-Email notification
+*Email notification*
     A common situation may be where a site administrator
     wants to keep track of the Spaces being created. A Plone Content Rule is
     provided with this add-on to satisfy this use case.  Using this Rule is 
