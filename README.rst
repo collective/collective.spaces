@@ -3,7 +3,7 @@
 Introduction
 ============
 
-.. image:: src/collective/spaces/resources/spaces-logo.png
+.. image:: https://eresearch.jcu.edu.au/site-resources/spaces-logo.png
    :align: right
 
 `collective.spaces` is a simple way of creating mini-sites within the Plone
