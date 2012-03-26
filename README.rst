@@ -15,7 +15,7 @@ be useful in a self-managed, collaborative environment.  For instance:
 * Ability for users to self-create Spaces
 * Each Space appears as a sub-site
 * Customisable logo per-Space
-* Ability for site administration to customise Space template
+* Ability for site administration to customise a template used for new Spaces
 
 What this offers
 ================
@@ -24,10 +24,9 @@ What this offers
 * Web-based forms built using ``plone.app.z3cform`` and friends
 * Leverages existing Plone tech (such as authentication, INavigationRoot and
   Dexterity behaviours)
-* Attempts to use as little voodoo as possible to achieve just the features
   on offer.
-* Other options like ``collective.lineage`` provide unnecessary features 
-  and introduce undesirable dependencies
+* Other options (such as ``collective.lineage``) provide unnecessary features 
+  or else introduce extra dependencies
 
 Use Case (aka when-to-use-this)
 ===============================
@@ -39,6 +38,8 @@ Use Case (aka when-to-use-this)
 #. Each workspace should be able to be self-managed
 #. Each workspace can be allowed limited customisation
 #. Workspaces should be all contained within a single Plone site
+#. Desire for a template to be easily customisable, with arbitrary content
+   attached within Plone.
 
 Installation
 ============
