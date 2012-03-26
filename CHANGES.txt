@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.1 (unreleased)
-----------------
+1.0.1 (unreleased)
+------------------
 
 - Updating URL in setup.py to be the correct GitHub address.
   [davidjb]
