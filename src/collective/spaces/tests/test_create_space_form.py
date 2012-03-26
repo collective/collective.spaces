@@ -14,6 +14,7 @@ from collective.spaces.browser.createform import ICreateSpace
 from collective.spaces.testing import COLLECTIVE_SPACES_FUNCTIONAL_TESTING, \
         DOC_TEST_OPTIONS
 
+
 class TestCreateSpaceForm(unittest.TestCase):
     """ Test the `Create a Space` form.
     """
@@ -27,7 +28,9 @@ class TestCreateSpaceForm(unittest.TestCase):
         self.portal = self.layer['portal']
         self.portal_url = self.portal.absolute_url()
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('Document', id='example-page', title='Example')
+        self.portal.invokeFactory('Document',
+                                  id='example-page',
+                                  title='Example')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         transaction.commit()
 
@@ -35,7 +38,8 @@ class TestCreateSpaceForm(unittest.TestCase):
         """ Ensure the Create a Space form is traversable.
         """
         from collective.spaces.browser.createform import CreateSpaceForm
-        self.assertIsInstance(self.portal.restrictedTraverse('@@create-space'), CreateSpaceForm)
+        self.assertIsInstance(self.portal.restrictedTraverse('@@create-space'),
+                              CreateSpaceForm)
 
     def test_createform_administrators(self):
         """ Test create Space form for types of admin users.
@@ -54,10 +58,12 @@ class TestCreateSpaceForm(unittest.TestCase):
                           'Basic %s:%s' % (TEST_USER_NAME,
                                            TEST_USER_PASSWORD))
 
-        browser.open(self.portal_url+'/@@create-space')
+        browser.open(self.portal_url + '/@@create-space')
         self.assertIn('Create a new Space', browser.contents)
         self.assertIn('Template ID', browser.contents)
-        self.assertIsNotNone(browser.getControl(name='form.widgets.template_id'))
+        self.assertIsNotNone(
+            browser.getControl(name='form.widgets.template_id')
+        )
 
     def test_createform_regular_users(self):
         """ Test create Space form for types of regular (non-admin) users.
@@ -65,7 +71,6 @@ class TestCreateSpaceForm(unittest.TestCase):
         ROLES = ['Authenticated', 'Contributor']
         for role in ROLES:
             self._test_createform_regular_users(role)
-
 
     def _test_createform_regular_users(self, role):
         """ Helper method to test creation form elements as normal user.
@@ -77,7 +82,7 @@ class TestCreateSpaceForm(unittest.TestCase):
                           'Basic %s:%s' % (TEST_USER_NAME,
                                            TEST_USER_PASSWORD))
 
-        browser.open(self.portal_url+'/@@create-space')
+        browser.open(self.portal_url + '/@@create-space')
         self.assertIn('Create a new Space', browser.contents)
         self.assertNotIn('Template ID', browser.contents)
         self.assertRaises(LookupError,
@@ -90,7 +95,7 @@ class TestCreateSpaceForm(unittest.TestCase):
         browser = Browser(self.app)
         browser.open(self.portal_url + '/logout')
 
-        browser.open(self.portal_url+'/@@create-space')
+        browser.open(self.portal_url + '/@@create-space')
         self.assertNotIn('Create a new Space', browser.contents)
 
     def test_space_id_validator(self):
@@ -111,7 +116,6 @@ class TestCreateSpaceForm(unittest.TestCase):
         #Should deny validation
         self.assertRaisesRegexp(zope.interface.Invalid, 'ID is reserved',
                                 validator.validate, u'space-template')
-
 
         self.assertIsNone(validator.validate(u'a-valid-id'))
         self.assertIsNone(validator.validate(u'another_valid.id'))
@@ -136,6 +140,7 @@ class TestCreateSpaceForm(unittest.TestCase):
         self.assertIn('example-page', self.portal)
         self.assertIsNone(validator.validate(u'example-page'))
 
+
 def _setUp(test):
     layer = test.globs['layer']
     portal = layer['portal']
@@ -143,6 +148,7 @@ def _setUp(test):
     portal.invokeFactory('News Item', id='example-item', title='Example News')
     setRoles(portal, TEST_USER_ID, ['Member'])
     transaction.commit()
+
 
 def test_suite():
     suite = unittest.TestSuite()

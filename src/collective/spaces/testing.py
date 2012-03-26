@@ -8,6 +8,7 @@ from plone.app.testing import applyProfile
 
 from zope.configuration import xmlconfig
 
+
 class CollectiveSpaces(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE, )
@@ -21,7 +22,6 @@ class CollectiveSpaces(PloneSandboxLayer):
         xmlconfig.file('overrides.zcml',
                        collective.spaces,
                        context=configurationContext)
-
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.spaces:default')

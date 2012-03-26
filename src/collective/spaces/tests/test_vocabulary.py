@@ -26,8 +26,6 @@ class TestVocabulary(unittest.TestCase):
         vocabulary = scales_vocabulary(self.portal)
         self.assertIsInstance(vocabulary, SimpleVocabulary)
 
-        vocabulary_titles  = [x.title for x in vocabulary]
+        vocabulary_titles = [x.title for x in vocabulary]
         self.assertEqual(vocabulary_titles[0], 'Large (768x768)')
         self.assertEqual(vocabulary_titles[-1], 'Listing (16x16)')
-
-

@@ -13,6 +13,7 @@ from plone.app.testing import setRoles, \
 from collective.spaces.testing import COLLECTIVE_SPACES_FUNCTIONAL_TESTING, \
         DOC_TEST_OPTIONS
 
+
 def _setUp(test):
     layer = test.globs['layer']
     portal = layer['portal']
@@ -26,6 +27,7 @@ def _setUp(test):
                          title='Another Space')
     setRoles(portal, TEST_USER_ID, ['Member'])
     transaction.commit()
+
 
 def test_suite():
     suite = unittest.TestSuite()

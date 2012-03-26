@@ -27,8 +27,16 @@ class TestInstall(unittest.TestCase):
     def test_permissions_installed(self):
         """ Ensure permissions are available and set correctly.
         """
-        self.assertIsNotNone(self.portal.rolesOfPermission('collective.spaces: Add Space'))
-        self.assertIsNotNone(self.portal.rolesOfPermission('collective.spaces: Create Space via web'))
+        self.assertIsNotNone(
+            self.portal.rolesOfPermission(
+                'collective.spaces: Add Space'
+            )
+        )
+        self.assertIsNotNone(
+            self.portal.rolesOfPermission(
+                'collective.spaces: Create Space via web'
+            )
+        )
 
     def test_structure_created(self):
         from collective.spaces.space import ISpace
@@ -49,4 +57,3 @@ class TestInstall(unittest.TestCase):
         rule = storage.get('spaces-email-notification')
         self.assertEqual(rule.id, '++rule++spaces-email-notification')
         self.assertTrue(rule.enabled)
-

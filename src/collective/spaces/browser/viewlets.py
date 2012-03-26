@@ -5,6 +5,7 @@ from collective.spaces.space import ISpace
 
 CUSTOM_LOGO_FIELD = 'custom_logo'
 
+
 class CustomLogoViewlet(common.LogoViewlet):
     """ Logo viewlet used to customise logos for Space areas.
 
@@ -23,15 +24,18 @@ class CustomLogoViewlet(common.LogoViewlet):
 
         >>> import os
         >>> import collective.spaces
-        >>> filename = os.path.join(os.path.dirname(collective.spaces.__file__),
-        ...                                     'resources', 'spaces-logo.png')
+        >>> filename = os.path.join(
+        ...     os.path.dirname(collective.spaces.__file__),
+        ...     'resources',
+        ...     'spaces-logo.png')
         >>> image = open(filename, 'rb').read()
 
     Set it as the custom Space logo
 
         >>> import transaction
         >>> from plone import namedfile
-        >>> space.custom_logo = namedfile.NamedImage(image, filename=u"img.png")
+        >>> space.custom_logo = namedfile.NamedImage(image,
+        ...                                          filename=u"img.png")
         >>> transaction.commit()
 
     Load up our test browser to check the custom logo
@@ -110,13 +114,19 @@ class LogoViewlet(common.LogoViewlet):
         >>> '<img src="http://nohost/plone/logo.png"' in browser.contents
         True
 
-    Here's a simple PNG logo to use as the Space's custom logo. This is just
-    a 1x1 black PNG. Set this up as the logo.
+    Here's a simple PNG logo to use as the Space's custom logo.
+
+        >>> import os
+        >>> import collective.spaces
+        >>> filename = os.path.join(
+        ...     os.path.dirname(collective.spaces.__file__),
+        ...     'resources',
+        ...     'spaces-logo.png')
+        >>> image = open(filename, 'rb').read()
 
         >>> from plone import namedfile
-
-        >>> logo = "\\x89PNG\\r\\n\\x1a\\n\\x00\\x00\\x00\\rIHDR\\x00\\x00\\x00\\x01\\x00\\x00\\x00\\x01\\x08\\x02\\x00\\x00\\x00\\x90wS\\xde\\x00\\x00\\x00\\x01sRGB\\x00\\xae\\xce\\x1c\\xe9\\x00\\x00\\x00\\x0cIDAT\\x08\\xd7c```\\x00\\x00\\x00\\x04\\x00\\x01'4'\\n\\x00\\x00\\x00\\x00IEND\\xaeB`\\x82"
-        >>> space.custom_logo = namedfile.NamedImage(logo, filename=u"1x1.png")
+        >>> space.custom_logo = namedfile.NamedImage(image,
+        ...                                          filename=u"1x1.png")
         >>> transaction.commit()
 
     Check to see this is now visible
@@ -154,7 +164,8 @@ class LogoViewlet(common.LogoViewlet):
         self.useCustomLogo = ISpace.providedBy(navigation_root) and \
                 getattr(navigation_root, CUSTOM_LOGO_FIELD)
 
-        Viewlet = self.useCustomLogo and CustomLogoViewlet or common.LogoViewlet
+        Viewlet = self.useCustomLogo and CustomLogoViewlet \
+                or common.LogoViewlet
         logo_viewlet = Viewlet(self.context,
                                self.request,
                                self.view,

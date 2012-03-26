@@ -13,6 +13,7 @@ from collective.spaces import _, utils
 
 ALL_ROLES = ['Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner']
 
+
 class ICreateSpace(form.Schema):
     """Schema for through-the-web `Create a Space` form.
     """
@@ -44,6 +45,7 @@ class ICreateSpace(form.Schema):
         required=True,
         default=u"space-template",
     )
+
 
 class CreateSpaceForm(form.SchemaForm):
     """Form used to create Space content via the web.
@@ -126,7 +128,8 @@ class CreateSpaceForm(form.SchemaForm):
     Super.  Let's carry on and login as an adminstrator with the
     Site Administrator role.
 
-        >>> testing.setRoles(portal,testing.TEST_USER_ID,['Site Administrator'])
+        >>> testing.setRoles(portal,testing.TEST_USER_ID,
+        ...                  ['Site Administrator'])
         >>> transaction.commit()
         >>> browser.open(portal_url)
         >>> 'Site Setup' in browser.contents
@@ -272,8 +275,8 @@ class CreateSpaceForm(form.SchemaForm):
 
             #If okay, then redirect to the new Space
             IStatusMessage(self.request).addStatusMessage(
-                _(u"Welcome to your new Space! Start adding content and sharing \
-                    with others."),
+                _(u"Welcome to your new Space! Start adding content"
+                  u"and sharing with others."),
                 "info"
             )
 
@@ -283,7 +286,6 @@ class CreateSpaceForm(form.SchemaForm):
             self.status = _(u"An error occurred whilst creating your Space \
                             with this ID. Please try again or contact your \
                             site administrator if issues persist.")
-
 
     @button.buttonAndHandler(_(u"Cancel"))
     def handleCancel(self, action):
@@ -308,6 +310,7 @@ validator.WidgetValidatorDiscriminators(
 )
 grok.global_adapter(SpaceIdValidator)
 
+
 class TemplateIdValidator(validator.SimpleFieldValidator):
     """Validate the template ID field."""
 
@@ -321,4 +324,3 @@ validator.WidgetValidatorDiscriminators(
     field=ICreateSpace['template_id'],
 )
 grok.global_adapter(TemplateIdValidator)
-

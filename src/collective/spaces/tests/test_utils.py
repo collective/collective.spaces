@@ -8,6 +8,7 @@ from collective.spaces.testing import\
 
 from collective.spaces import utils
 
+
 class TestUtils(unittest.TestCase):
 
     layer = COLLECTIVE_SPACES_INTEGRATION_TESTING
