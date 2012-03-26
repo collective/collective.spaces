@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1dev (unreleased)
--------------------
+1.0 (2012-03-26)
+----------------
 
 - Provide email content rule for when Spaces are created. This is not
   enabled by default.
