@@ -8,7 +8,6 @@ from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.dexterity.interfaces import isValidId
 from plone.directives import form
-from plone.formwidget.recaptcha import ReCaptchaValidator
 
 from collective.spaces import _, utils
 
