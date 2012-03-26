@@ -23,3 +23,5 @@ dist
 .coverage
 include
 lib
+local
+var
