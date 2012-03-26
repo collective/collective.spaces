@@ -275,7 +275,7 @@ class CreateSpaceForm(form.SchemaForm):
 
             #If okay, then redirect to the new Space
             IStatusMessage(self.request).addStatusMessage(
-                _(u"Welcome to your new Space! Start adding content"
+                _(u"Welcome to your new Space! Start adding content "
                   u"and sharing with others."),
                 "info"
             )
