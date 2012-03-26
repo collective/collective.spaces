@@ -5,7 +5,7 @@
     xmlns:zcml="http://namespaces.zope.org/zcml">
 
   <browser:menuItem
-      for="collective.spaces.space.ISpace"
+      for="collective.spaces.interfaces.ISpace"
       menu="plone_displayviews"
       title="Properties view"
       action="@@view"

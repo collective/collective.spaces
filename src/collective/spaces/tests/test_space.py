@@ -24,7 +24,7 @@ class TestSpace(unittest.TestCase):
         self.assertIsNotNone(fti)
 
     def test_schema(self):
-        from collective.spaces.space import ISpace
+        from collective.spaces.interfaces import ISpace
 
         fti = queryUtility(IDexterityFTI, name='collective.spaces.space')
         schema = fti.lookupSchema()
@@ -32,7 +32,7 @@ class TestSpace(unittest.TestCase):
 
     def test_factory(self):
         from zope.component import createObject
-        from collective.spaces.space import ISpace
+        from collective.spaces.interfaces import ISpace
         fti = queryUtility(IDexterityFTI, name='collective.spaces.space')
         ISpace.providedBy(createObject(fti.factory))
 

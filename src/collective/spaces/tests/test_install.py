@@ -39,7 +39,7 @@ class TestInstall(unittest.TestCase):
         )
 
     def test_structure_created(self):
-        from collective.spaces.space import ISpace
+        from collective.spaces.interfaces import ISpace
 
         self.assertIn('space-template', self.portal)
         self.assertTrue(ISpace.providedBy(self.portal['space-template']))
