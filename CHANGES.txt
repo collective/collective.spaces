@@ -4,6 +4,9 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Ensure ``plone.app.dexerity`` is installed upon installation of this
+  package.
+  [davidjb]
 - Updating URL in setup.py to be the correct GitHub address.
   [davidjb]
 
