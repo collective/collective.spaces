@@ -4,6 +4,10 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Just create an empty space if the template doesn't exist.
+  [davidjb]
+- Adding logging for exceptions on space creation.
+  [davidjb]
 - Ensure ``plone.app.dexerity [grok]`` is installed upon installation of this
   package.
   [davidjb]

@@ -1,3 +1,5 @@
+import logging
+
 from five import grok
 from zope import interface, schema
 from zope.security import checkPermission
@@ -7,12 +9,14 @@ from Products.CMFCore.interfaces import ISiteRoot
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
 from plone.app.dexterity.interfaces import isValidId
+from plone.dexterity.utils import createContentInContainer
 from plone.directives import form
 
 from collective.spaces import _, utils
 
 ALL_ROLES = ['Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner']
 
+log = logging.getLogger(__name__)
 
 class ICreateSpace(form.Schema):
     """Schema for through-the-web `Create a Space` form.
@@ -266,8 +270,15 @@ class CreateSpaceForm(form.SchemaForm):
         member_id = member.getUserName()
 
         try:
-            template = self.context[template_id]
-            new_space = utils._clone(self.context, template, space_id)
+            template = self.context.get(template_id)
+            #Check if template exists or not. If not, create from scratch.
+            if template:
+                new_space = utils._clone(self.context, template, space_id)
+            else:
+                new_space = createContentInContainer(self.context,
+                                                     'collective.spaces.space',
+                                                     id=space_id,
+                                                     checkConstraints=False)
             new_space.setTitle(space_title)
             new_space.setCreators(member_id)
             new_space.manage_setLocalRoles(member_id, ALL_ROLES)
@@ -282,7 +293,8 @@ class CreateSpaceForm(form.SchemaForm):
 
             space_url = new_space.absolute_url()
             self.request.response.redirect(space_url)
-        except:
+        except Exception as e:
+            log.exception("Coud not create a Space")
             self.status = _(u"An error occurred whilst creating your Space \
                             with this ID. Please try again or contact your \
                             site administrator if issues persist.")
