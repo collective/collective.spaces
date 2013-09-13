@@ -301,8 +301,8 @@ class SpaceIdValidator(validator.SimpleFieldValidator):
     def validate(self, value):
         super(SpaceIdValidator, self).validate(value)
         if value in self.context:
-            raise interface.Invalid(_(u"This ID is reserved. \
-                                      Please enter another."))
+            raise interface.Invalid(_(u"This ID is reserved or already in use."
+                                      u" Please enter another."))
 
 validator.WidgetValidatorDiscriminators(
     SpaceIdValidator,
