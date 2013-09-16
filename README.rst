@@ -6,6 +6,9 @@ Introduction
 .. image:: https://eresearch.jcu.edu.au/site-resources/spaces-logo.png
    :align: right
 
+.. image:: https://travis-ci.org/collective/collective.spaces.png?branch=master
+    :target: https://travis-ci.org/collective/collective.spaces
+
 `collective.spaces` is a simple way of creating mini-sites within the Plone
 CMS, with each mini-site based on a fully-customisable template.  
 This product deploys a light-weight Dexterity-based content type
