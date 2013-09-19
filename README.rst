@@ -134,6 +134,14 @@ Source code is available within the `collective GitHub` at
 https://github.com/collective/collective.spaces for submission of issues, 
 fixes, and improvements.
 
+Incompatibilties
+================
+
+* Products.CMFPlacefulWorkflow is currently incompatible due to policy
+  traversal leading to an infinite loop when performing actions like adding
+  or modifying comments on content. This issue is present with version 1.5.9
+  and caused by this loop: Products/CMFPlacefulWorkflow/adapter.py (line 71)
+
 To Do
 =====
 
