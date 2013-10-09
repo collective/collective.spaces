@@ -89,14 +89,16 @@ Security defaults
 
 By default:
 
-* All logged-in users have the ability to create new Spaces via
-  the `Create a new Space` form (``/@@create-space``). 
+* All logged-in users (``Authenticated``) have the ability to create new Spaces 
+  via the `Create a new Space` form (``/@@create-space``). 
 * Only Site Administrators and Managers can manually create Spaces via the
   `Add new` menu. Regular users, including `Contributor` users, cannot do this.
 
 To change these defaults, load the `Manage Access` ZMI page 
 (for instance, ``http://localhost:8080/Plone/manage_access``) and change the
-roles associated with the relevant ``collective.spaces`` permissions.
+roles associated with the relevant ``collective.spaces`` permissions. You can
+also use a GenericSetup profile in an extension product to modify these 
+permissions (``rolemap.xml`` in your profile).
 
 Suggestions
 ===========
@@ -147,5 +149,7 @@ To Do
 
 * Tests for email notification content rule (when enabled)
 * Handle issues with displaying ID field - can we sanely present users
-  the ability to change their Space ID? 
+  the ability to change their Space ID?  In standard Plone machinery, being
+  able to rename content in a context depends upon having the ``Copy or Move``
+  permission on the folder context. 
 
