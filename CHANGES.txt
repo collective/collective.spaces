@@ -4,6 +4,9 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Ensure create space action is only visible to those with the correct
+  permission.
+  [davidjb]
 - Just create an empty space if the template doesn't exist.
   [davidjb]
 - Adding logging for exceptions on space creation.
