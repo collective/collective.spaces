@@ -23,3 +23,4 @@ class ISpace(form.Schema):
         default="preview",
         vocabulary=u"collective.spaces.scales_vocabulary",
     )
+

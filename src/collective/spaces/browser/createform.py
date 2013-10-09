@@ -12,9 +12,8 @@ from plone.app.dexterity.interfaces import isValidId
 from plone.dexterity.utils import createContentInContainer
 from plone.directives import form
 
-from collective.spaces import _, utils
+from collective.spaces import _, utils, ALL_ROLES
 
-ALL_ROLES = ['Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner']
 
 log = logging.getLogger(__name__)
 

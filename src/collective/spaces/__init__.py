@@ -2,6 +2,7 @@
 from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory("collective.spaces")
+ALL_ROLES = ['Contributor', 'Editor', 'Reader', 'Reviewer', 'Owner']
 
 
 def initialize(context):
