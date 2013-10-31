@@ -37,6 +37,7 @@ setup(name='collective.spaces',
           'setuptools',
           'plone.app.dexterity [grok]',
           'plone.app.z3cform',
+          'plone.app.contentmenu',
           # -*- Extra requirements: -*-
       ],
       extras_require={'test': ['plone.app.testing']},

@@ -4,6 +4,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Ensure we depend on plone.app.contentmenu for correct ZCML loading.
+  [davidjb]
 - Ensure create space action is only visible to those with the correct
   permission.
   [davidjb]
