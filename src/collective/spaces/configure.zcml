@@ -17,6 +17,14 @@
       description="Installs self-managed collaborative workspace infrastructure (Spaces)"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+  <genericsetup:upgradeStep
+      source="*"
+      destination="0002"
+      title="Enable Space content type restrictions."
+      description="Reconfigures the Space Dexterity type with relevant content type behavior"
+      profile="collective.spaces:default"
+      handler=".upgrades.upgrade_0001_to_0002"
+      />
 
   <!-- Permission for adding Spaces -->
   <!-- Create a new Space via the web form -->
