@@ -4,6 +4,10 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+- Workaround folder type constraint inheritance issue by pretending Space
+  content is like Archetypes. This handles `Plone issue 
+  #13792 <https://dev.plone.org/ticket/13792`_.
+  [davidjb]
 - Enable folder constraints on the Space content type via Dexterity behaviour.
   [davidjb]
 - Ensure we depend on plone.app.contentmenu for correct ZCML loading.
