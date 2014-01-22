@@ -256,7 +256,7 @@ class CreateSpaceForm(form.SchemaForm):
             self.status = self.formErrorsMessage
             return
 
-        space_id = unicode(data['id'])
+        space_id = str(data['id'])
         space_title = unicode(data['space_title'])
         template_id = 'space-template'
 
