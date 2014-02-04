@@ -9,7 +9,7 @@ Changelog
   [davidjb]
 - Workaround folder type constraint inheritance issue by pretending Space
   content is like Archetypes. This handles `Plone issue 
-  #13792 <https://dev.plone.org/ticket/13792`_.
+  #13792 <https://dev.plone.org/ticket/13792>`_.
   [davidjb]
 - Enable folder constraints on the Space content type via Dexterity behaviour.
   [davidjb]
